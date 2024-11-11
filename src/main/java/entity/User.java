@@ -18,6 +18,7 @@ public class User {
     private String password;
     private String bio;
     private LocalDate createDate;
+    private int tweetId;
 
 
 }
