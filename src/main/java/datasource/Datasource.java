@@ -30,7 +30,7 @@ public class Datasource {
         });
     }
 
-   public static Connection geConnection(){
+   public static Connection getConnection(){
     return connection;
    }
 
