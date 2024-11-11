@@ -14,7 +14,6 @@ public class Tweet {
     private long tweetId;
     private String content;
     private Date createDate;
-    private List<Tag> tags;
     private long userId;
 
 
