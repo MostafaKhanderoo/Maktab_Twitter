@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Tweet {
-    private int tweetId;
+    private long tweetId;
     private String content;
     private List<Tag> tags;
 
