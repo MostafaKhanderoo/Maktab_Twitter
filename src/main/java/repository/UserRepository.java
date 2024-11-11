@@ -26,7 +26,7 @@ public class UserRepository {
             WHERE ID  = ?
             """;
     public User save(User user)throws SQLException{
-      var statement=  Datasource.geConnection().prepareStatement(INSERT_SQL);
+      var statement=  Datasource.getConnection().prepareStatement(INSERT_SQL);
       statement.setString(1,user.getAccountName());
         statement.setString(2,user.getEmail());
         statement.setString(3,user.getUsername());
@@ -37,7 +37,7 @@ public class UserRepository {
         return user;
     }
     public void deleteById(int id)throws  SQLException{
-        try(var statement=  Datasource.geConnection().prepareStatement(DELETE_BY_ID_SQL)){
+        try(var statement=  Datasource.getConnection().prepareStatement(DELETE_BY_ID_SQL)){
             statement.setLong(1,id);
            var affectedRows =  statement.executeUpdate();
             System.out.println("Account delete: " +affectedRows);
@@ -45,7 +45,7 @@ public class UserRepository {
     }
 
     public User findById(int id)throws  SQLException{
-        try(var statement=  Datasource.geConnection().prepareStatement(FIND_BY_ID_SQL)){
+        try(var statement=  Datasource.getConnection().prepareStatement(FIND_BY_ID_SQL)){
             statement.setLong(1 , id);
            ResultSet resultSet= statement.executeQuery();
            User user =  null;
