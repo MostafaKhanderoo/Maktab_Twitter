@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
 
@@ -11,14 +12,14 @@ import java.util.Calendar;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private int userId;
+    private long userId;
     private String accountName;
     private String email;
     private String username;
     private String password;
     private String bio;
-    private LocalDate createDate;
-    private int tweetId;
+    private Date createDate;
+    private long tweetId;
 
 
 }
