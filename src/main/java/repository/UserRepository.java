@@ -14,8 +14,8 @@ import java.time.LocalDate;
 public class UserRepository {
 
     private static final  String INSERT_SQL  = """
-            INSERT INTO USERS(account_name ,email,username,password,bio,tweetId)
-            VALUES(?,?,?,?,?,?)
+            INSERT INTO USERS(account_name ,email,username,password,bio)
+            VALUES(?,?,?,?,?)
             """;
     private static final String DELETE_BY_ID_SQL= """
             DELETE FROM USERS 
@@ -32,7 +32,6 @@ public class UserRepository {
         statement.setString(3,user.getUsername());
         statement.setString(4,user.getPassword());
         statement.setString(5,user.getBio());
-        statement.setLong(6,user.getTweetId());
         statement.execute();
         statement.close();
         return user;
@@ -58,8 +57,8 @@ public class UserRepository {
                String password = resultSet.getString(5);
                String bio = resultSet.getString(6);
                Date createDate =resultSet.getDate(7);
-               long tweetId = resultSet.getLong(8);
-               user = new User(userId,accountName,email,username,password,bio,createDate,tweetId);
+
+               user = new User(userId,accountName,email,username,password,bio,createDate);
 
 
            }
