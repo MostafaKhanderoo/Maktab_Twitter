@@ -35,21 +35,32 @@ public class UserService {
             signing.setPassword(password);
             signing.setBio(bio);
 
-            return userRepository.save(signing);
+             userRepository.save(signing);
+            System.out.println("signing It was successful.");
+             return user;
         }
 
     }
 
-    public boolean userLogin(String username, String password) throws SQLException {
-        var checkingUserName = userRepository.findByUsername(username);
-        var checkingUserEmail = userRepository.findByUsername(username);
+    public User userLogin(String getText, String password) throws SQLException {
+        var checkingUserName = userRepository.findByUsername(getText);
+        var checkingUserEmail = userRepository.findByEmail(getText);
         if (checkingUserName != null || checkingUserEmail !=null) {
             if (checkingUserName.getPassword().equals(password) || checkingUserEmail.getPassword().equals(password)) {
                 AuthenticationServices.setLoggedUser(checkingUserName);
-                return true;
+                AuthenticationServices.setLoggedUser(checkingUserEmail);
+                AuthenticationServices.getLoggedInUser();
+
+                System.out.println("log was successful.");
+
             }
         }else
             System.out.println("UserName or email not found try again!  ");
-        return false;
+        return null;
+    }
+
+    public void logD (){
+      AuthenticationServices.getLoggedInUser();
+
     }
 }
