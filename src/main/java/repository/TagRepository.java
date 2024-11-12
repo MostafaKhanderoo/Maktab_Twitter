@@ -6,6 +6,9 @@ import entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class TagRepository {
@@ -25,6 +28,9 @@ public class TagRepository {
     private static final String FIND_BY_NAME = """
             SELECT * FROM TAGS
             WHERE title = ?
+            """;
+    private static final String FIND_ALL_TAGS = """
+            SELECT *FROM  TAGS;
             """;
 
     public Tag save(Tag tag) throws SQLException {
@@ -73,4 +79,25 @@ public class TagRepository {
 
     }
 
+    public List<Tag> findAllTags() {
+
+        List<Tag> tags = new ArrayList<>();
+        try (var statement = Datasource.getConnection().prepareStatement(FIND_ALL_TAGS)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Long id = resultSet.getLong(1);
+                String title = resultSet.getString(2);
+                tags.add(new Tag(id, title));
+
+
+            }
+            statement.execute();
+            statement.close();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }return tags;
+
+    }
 }
