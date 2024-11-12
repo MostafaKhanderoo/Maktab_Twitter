@@ -29,6 +29,10 @@ public class UserRepository {
             SELECT * FROM USERS
             WHERE username = ?
             """;
+    private static final String FIND_BY_EMAIL= """
+            SELECT * FROM USERS
+            WHERE email=?
+            """;
     public User save(User user)throws SQLException{
       var statement=  Datasource.getConnection().prepareStatement(INSERT_SQL);
       statement.setString(1,user.getAccountName());
@@ -77,21 +81,44 @@ public class UserRepository {
 
             User user = null;
             if (resultSet.next()) {
-                Long userId =resultSet.getLong(1 );
+                Long userId = resultSet.getLong(1);
                 String accountName = resultSet.getString(2);
                 String email = resultSet.getString(3);
                 String userName = resultSet.getString(4);
                 String password = resultSet.getString(5);
                 String bio = resultSet.getString(6);
-                Date createDate =resultSet.getDate(7);
+                Date createDate = resultSet.getDate(7);
 
-                user = new User(userId,accountName,email,userName,password,bio,createDate);
+                user = new User(userId, accountName, email, userName, password, bio, createDate);
 
 
             }
 
             return user;
         }
+    }
+        public User findByEmail(String email) throws SQLException {
+            try (var statement = Datasource.getConnection().prepareStatement(FIND_BY_EMAIL)) {
+                statement.setString(1, email);
+                ResultSet resultSet = statement.executeQuery();
+
+                User user = null;
+                if (resultSet.next()) {
+                    Long userId =resultSet.getLong(1 );
+                    String accountName = resultSet.getString(2);
+                    String gmail = resultSet.getString(3);
+                    String userName = resultSet.getString(4);
+                    String password = resultSet.getString(5);
+                    String bio = resultSet.getString(6);
+                    Date createDate =resultSet.getDate(7);
+
+                    user = new User(userId,accountName,gmail,userName,password,bio,createDate);
+
+
+                }
+
+                return user;
+            }
     }
 
 
