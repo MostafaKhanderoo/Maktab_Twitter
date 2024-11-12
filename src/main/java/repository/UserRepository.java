@@ -25,6 +25,10 @@ public class UserRepository {
             SELECT * FROM USERS 
             WHERE ID  = ?
             """;
+    private static final String FIND_BY_USERNAME = """
+            SELECT * FROM USERS
+            WHERE username = ?
+            """;
     public User save(User user)throws SQLException{
       var statement=  Datasource.getConnection().prepareStatement(INSERT_SQL);
       statement.setString(1,user.getAccountName());
@@ -66,6 +70,30 @@ public class UserRepository {
         }
 
     }
+    public User findByUsername(String username) throws SQLException {
+        try (var statement = Datasource.getConnection().prepareStatement(FIND_BY_USERNAME)) {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            User user = null;
+            if (resultSet.next()) {
+                Long userId =resultSet.getLong(1 );
+                String accountName = resultSet.getString(2);
+                String email = resultSet.getString(3);
+                String userName = resultSet.getString(4);
+                String password = resultSet.getString(5);
+                String bio = resultSet.getString(6);
+                Date createDate =resultSet.getDate(7);
+
+                user = new User(userId,accountName,email,userName,password,bio,createDate);
+
+
+            }
+
+            return user;
+        }
+    }
+
 
 
 
