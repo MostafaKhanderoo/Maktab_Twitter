@@ -33,12 +33,11 @@ public class TagRepository {
             SELECT *FROM  TAGS;
             """;
 
-    public Tag save(Tag tag) throws SQLException {
+    public void save(String title) throws SQLException {
         var statement = Datasource.getConnection().prepareStatement(INSERT_SQL);
-        statement.setString(1, tag.getTitle());
+        statement.setString(1,title);
         statement.execute();
         statement.close();
-        return tag;
     }
 
     public void deleteById(int id) throws SQLException {
