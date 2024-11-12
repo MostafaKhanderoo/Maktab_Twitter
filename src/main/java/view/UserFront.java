@@ -1,6 +1,8 @@
 package view;
 
 import entity.User;
+import service.AuthenticationServices;
+import service.TweetService;
 import service.UserService;
 
 import java.sql.SQLException;
@@ -38,8 +40,44 @@ public class UserFront {
         String password =scanner.nextLine();
 
         userService.userLogin(getText,password);
-
+        User activeUser = AuthenticationServices.getLoggedInUser();
+        logInUser(activeUser);
+       // AuthenticationServices.getLoggedInUser(userService.userLogin());
     }
 
+    public static void logInUser(User user) throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("1.create new tweet");
+        System.out.println("2.view all tweet");
+        System.out.println("3.change your profile");
+        System.out.println("4.log out");
+        System.out.print("choose: ");
+        int choose = scanner.nextInt();
+        boolean flag1 = true;
+        while (flag1) {
+            if (choose == 1) {
+                createTweet();
+            } else if (choose == 2) {
+                viewAllTweet();
+            } else if (choose == 3) {
+
+            } else if (choose == 4) {
+                flag1 = false;
+            } else
+                System.out.println("invalid number");
+        }
+
+    }
+    public static void createTweet()throws  SQLException{
+        Scanner scanner = new Scanner(System.in);
+        TweetService tweetService = new TweetService();
+        System.out.print("enter your content: ");
+        String content = scanner.nextLine();
+        tweetService.createNewTweet(content);
+    }
+    public static  void viewAllTweet(){
+
+    }
 
 }
