@@ -33,6 +33,15 @@ public class UserRepository {
             SELECT * FROM USERS
             WHERE email=?
             """;
+    private static String UPDATE_USER_SQL = """
+            UPDATE USER_ACCOUNT SET
+            USERNAME=?,
+            PASSWORD=?,
+            BIO=?,
+            DISPLAY_NAME=?
+            WHERE EMAIL=?
+            """;
+
     public User save(User user)throws SQLException{
       var statement=  Datasource.getConnection().prepareStatement(INSERT_SQL);
       statement.setString(1,user.getAccountName());
@@ -119,6 +128,19 @@ public class UserRepository {
 
                 return user;
             }
+    }
+    public User update(User user)throws SQLException{
+        try(var statement = Datasource.getConnection().prepareStatement(UPDATE_USER_SQL)){
+            statement.setString(1,user.getAccountName());
+            statement.setString(2,user.getEmail());
+            statement.setString(3,user.getUsername());
+            statement.setString(4,user.getPassword());
+            statement.setString(5,user.getBio());
+            statement.execute();
+            statement.executeUpdate();
+            statement.close();
+        }
+        return user;
     }
 
 
