@@ -21,12 +21,25 @@ public class UserFront {
         String username =scanner.nextLine();
         System.out.print("enter your password: ");
         String password =scanner.nextLine();
-        System.out.println("enter your bio about yourself: ");
+        System.out.print("enter your bio about yourself: ");
         String bio =scanner.nextLine();
         userService.userSignUp(accountName,email,username,password,bio);
 
 
 
     }
+    public static void log()throws SQLException{
+        UserService userService = new UserService();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("log page...");
+        System.out.print("enter your username OR email: ");
+        String getText = scanner.nextLine();
+        System.out.print("enter your password");
+        String password =scanner.nextLine();
+
+        userService.userLogin(getText,password);
+
+    }
+
 
 }
