@@ -63,11 +63,11 @@ public class UserRepository {
 
     public User findById(int id)throws  SQLException{
         try(var statement=  Datasource.getConnection().prepareStatement(FIND_BY_ID_SQL)){
-            statement.setLong(1 , id);
+              statement.setLong(1 , id);
            ResultSet resultSet= statement.executeQuery();
            User user =  null;
            if (resultSet.next()){
-               Long userId =resultSet.getLong(1 );
+               Long userId =resultSet.getLong( 1 );
                String accountName = resultSet.getString(2);
                String email = resultSet.getString(3);
                String username = resultSet.getString(4);
