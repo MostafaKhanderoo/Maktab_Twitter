@@ -1,6 +1,8 @@
 package view;
 
+import entity.Tweet;
 import entity.User;
+import repository.TweetRepository;
 import service.AuthenticationServices;
 import service.TweetService;
 import service.UserService;
@@ -40,14 +42,14 @@ public class UserFront {
         String password =scanner.nextLine();
 
         userService.userLogin(getText,password);
+      //  AuthenticationServices.setLoggedUser();
         User activeUser = AuthenticationServices.getLoggedInUser();
-        logInUser(activeUser);
-       // AuthenticationServices.getLoggedInUser(userService.userLogin());
+        logInUser();
+        //AuthenticationServices.getLoggedInUser(userService.userLogin());
     }
 
-    public static void logInUser(User user) throws SQLException {
+    public static void logInUser() throws SQLException {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("1.create new tweet");
         System.out.println("2.view all tweet");
         System.out.println("3.change your profile");
@@ -70,11 +72,17 @@ public class UserFront {
 
     }
     public static void createTweet()throws  SQLException{
+        System.out.println("Tweet...");
+        TweetRepository tweetRepository = new TweetRepository();
         Scanner scanner = new Scanner(System.in);
+
         TweetService tweetService = new TweetService();
         System.out.print("enter your content: ");
         String content = scanner.nextLine();
-        tweetService.createNewTweet(content);
+        System.out.print("enter your id: ");
+        long id = scanner.nextInt();
+       // Tweet tweet = new Tweet(1,content,null,null,1);
+        tweetService.createNewTweet(content,id);
     }
     public static  void viewAllTweet(){
 
