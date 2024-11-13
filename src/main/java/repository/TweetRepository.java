@@ -12,8 +12,8 @@ import java.util.List;
 
 public class TweetRepository {
     private static final String INSERT_SQL = """
-            INSERT INTO tweet()
-            VALUES(?)
+            INSERT INTO tweet(content ,user_id)
+            VALUES(?,?)
             """;
     private static final String DELETE_BY_ID_SQL = """
             DELETE FROM tweet 
@@ -31,15 +31,14 @@ public class TweetRepository {
             WHERE tweet = ?
             """;
 
-    public Tweet save(String content) throws SQLException {
-
+    public Tweet save(Tweet tweet) throws SQLException {
         var statement = Datasource.getConnection().prepareStatement(INSERT_SQL);
-
-        statement.setString(1, content);
+     statement.setString(1,tweet.getContent());
+     statement.setLong(2,tweet.getUserId());
         statement.execute();
         statement.close();
-        return null;
 
+return tweet;
     }
 
     public void DeleteById(int id) throws SQLException {
@@ -61,7 +60,7 @@ public class TweetRepository {
                 String content = resultSet.getString(2);
                 Date creatTweetDate = resultSet.getDate(3);
                 Long creatorId = resultSet.getLong(4);
-                tweet = new Tweet(tweetId, content, creatTweetDate, creatorId);
+            //    tweet = new Tweet(tweetId, content, creatTweetDate, creatorId);
             }
             return tweet;
         }
@@ -78,7 +77,7 @@ public class TweetRepository {
                 String content = resultSet.getString(2);
                 Date creatTweetDate = resultSet.getDate(3);
                 Long creatorId = resultSet.getLong(4);
-                tweets.add(new Tweet(tweetId, content, creatTweetDate, creatorId));
+              //  tweets.add(new Tweet(tweetId, content, creatTweetDate, creatorId));
 
 
             }
