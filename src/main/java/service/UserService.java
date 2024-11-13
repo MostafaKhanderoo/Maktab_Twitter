@@ -22,8 +22,7 @@ public class UserService {
         if (checkingUser != null) {
             System.out.println("Username is already taken!");
             return null;
-        }else
-        if (checkingEmail != null){
+        }else if (checkingEmail != null){
             System.out.println("email is already taken!");
             return null;
         }else {
