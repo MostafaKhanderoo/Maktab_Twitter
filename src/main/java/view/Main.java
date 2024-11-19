@@ -1,27 +1,27 @@
 package view;
 
-import entity.Tag;
-import entity.Tweet;
+import entity.LikeDislike;
+import entity.LikeTweet;
 import entity.User;
-import repository.TagRepository;
-import repository.TweetRepository;
+import repository.LikeRepository;
 import repository.UserRepository;
-import service.UserService;
+import service.LikeService;
 
 import java.sql.SQLException;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
-
+//ctrl + all + o
 public class Main {
     public static void main(String[] args) throws SQLException {
-//
-//TweetRepository tweetRepository = new
-//        TweetRepository();
-//Tweet tweet = new Tweet("hi",null,1);
-
-//tweetRepository.save(tweet);
-        codeRun();
-
+        // codeRun();
+        LikeTweet likeTweet = new LikeTweet();
+        likeTweet.setUserId(2);
+        likeTweet.setTweetId(3);
+        //LikeRepository likeRepository = new LikeRepository();
+      //  likeRepository.likeTweet(likeTweet);
+        LikeService.like(likeTweet.getUserId(),likeTweet.getTweetId());
     }
 
     private static void codeRun() throws SQLException {
