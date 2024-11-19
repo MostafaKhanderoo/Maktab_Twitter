@@ -7,12 +7,9 @@ import repository.UserRepository;
 import java.sql.SQLException;
 
 public class UserService {
-    UserRepository userRepository;
-    TweetRepository tweetRepository;
-  public UserService() throws SQLException {
-      userRepository = new UserRepository();
-      tweetRepository = new TweetRepository();
-  }
+    UserRepository userRepository = new UserRepository();
+    TweetRepository tweetRepository =new TweetRepository();
+
 
     public User userSignUp(String accountName,String email,String username, String password,String bio) throws SQLException {
         var checkingUser = userRepository.findByUsername(username);
