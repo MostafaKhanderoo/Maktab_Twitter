@@ -2,12 +2,10 @@ package repository;
 
 import datasource.Datasource;
 import entity.Tweet;
-import service.AuthenticationServices;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
 public class TweetRepository {

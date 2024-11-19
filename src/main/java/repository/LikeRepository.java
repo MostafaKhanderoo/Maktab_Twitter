@@ -1,9 +1,7 @@
 package repository;
 
 import datasource.Datasource;
-import entity.LikeDislike;
 import entity.LikeTweet;
-import service.AuthenticationServices;
 
 import java.sql.SQLException;
 

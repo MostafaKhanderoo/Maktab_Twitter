@@ -2,14 +2,12 @@ package repository;
 
 import datasource.Datasource;
 import entity.User;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import service.AuthenticationServices;
+import service.impl.AuthenticationServices;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 @NoArgsConstructor
 public class UserRepository {
