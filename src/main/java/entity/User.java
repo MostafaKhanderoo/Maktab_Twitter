@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.ObjectStreamClass;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +19,8 @@ public class User {
     private String password;
     private String bio;
     private Date createDate;
+//    private List<LikeTweet> likeTweet;
+
 
 
 }
