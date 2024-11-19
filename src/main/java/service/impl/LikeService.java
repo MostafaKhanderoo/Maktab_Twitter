@@ -1,10 +1,7 @@
 package service.impl;
 
-import entity.LikeDislike;
 import entity.LikeTweet;
 import repository.LikeRepository;
-
-import java.sql.SQLException;
 
 public class LikeService {
 
