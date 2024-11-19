@@ -4,6 +4,7 @@ import datasource.Datasource;
 import entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import service.AuthenticationServices;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -33,14 +34,17 @@ public class UserRepository {
             SELECT * FROM USERS
             WHERE email=?
             """;
-    private static String UPDATE_USER_SQL = """
-            UPDATE USER_ACCOUNT SET
-            USERNAME=?,
+    private static final String UPDATE_USER_SQL = """
+            UPDATE USERS SET
+            account_name=?,
+            email=?,
+            username=?,
             PASSWORD=?,
-            BIO=?,
-            DISPLAY_NAME=?
-            WHERE EMAIL=?
+            BIO=?
+    
+            WHERE user_id=?
             """;
+
 
     public User save(User user)throws SQLException{
       var statement=  Datasource.getConnection().prepareStatement(INSERT_SQL);
@@ -129,17 +133,33 @@ public class UserRepository {
                 return user;
             }
     }
-    public User update(User user)throws SQLException{
-        try(var statement = Datasource.getConnection().prepareStatement(UPDATE_USER_SQL)){
-            statement.setString(1,user.getAccountName());
-            statement.setString(2,user.getEmail());
-            statement.setString(3,user.getUsername());
-            statement.setString(4,user.getPassword());
-            statement.setString(5,user.getBio());
-            statement.execute();
-            statement.executeUpdate();
-            statement.close();
+    public User update(User user) throws SQLException {
+
+        try (
+             var statement = Datasource.getConnection().prepareStatement(UPDATE_USER_SQL)) {
+
+          var userId= AuthenticationServices.getLoggedInUser().getUserId();
+            statement.setString(1, user.getAccountName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getUsername());
+            statement.setString(4, user.getPassword());
+            statement.setString(5, user.getBio());
+            statement.setLong(6, userId);
+
+
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows == 0) {
+                System.out.println("Update failed, no rows affected.");
+             //   throw new SQLException
+            }
+
+            System.out.println("User updated successfully: ID = " + user.getUserId());
+
+        } catch (SQLException e) {
+
         }
+
         return user;
     }
 
