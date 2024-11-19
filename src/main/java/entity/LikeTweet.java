@@ -1,5 +1,6 @@
 package entity;
 
+import enumeration.LikeDislike;
 import lombok.*;
 
 @Data
