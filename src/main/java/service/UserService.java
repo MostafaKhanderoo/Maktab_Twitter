@@ -46,9 +46,14 @@ public class UserService {
         var checkingUserEmail = userRepository.findByEmail(getText);
         if (checkingUserName != null || checkingUserEmail !=null) {
             if (checkingUserName.getPassword().equals(password) || checkingUserEmail.getPassword().equals(password)) {
+            //    AuthenticationServices.setLoggedUser();
                 AuthenticationServices.setLoggedUser(checkingUserName);
-                AuthenticationServices.setLoggedUser(checkingUserEmail);
+                System.out.println("test");
+            //    AuthenticationServices.setLoggedUser(checkingUserEmail);
                 AuthenticationServices.getLoggedInUser();
+                System.out.println( AuthenticationServices.getLoggedInUser().getAccountName());
+                System.out.println(AuthenticationServices.getLoggedInUser().getUserId());
+                System.out.println();
 
                 System.out.println("log was successful.");
 
@@ -58,8 +63,23 @@ public class UserService {
         return null;
     }
 
-    public void logD (){
-      AuthenticationServices.getLoggedInUser();
+    public void logOut (){
+      AuthenticationServices.logout();
 
     }
+    public void updateProfile(String accountName,String email,String username, String password,String bio) throws SQLException {
+      AuthenticationServices.getLoggedInUser().getAccountName();
+      User user = new User();
+      user.setAccountName(accountName);
+      user.setEmail(email);
+      user.setUsername(username);
+      user.setPassword(password);
+      user.setBio(bio);
+        userRepository.update(user);
+        System.out.println("updating finish..");
+
+    }
+
+
+
 }

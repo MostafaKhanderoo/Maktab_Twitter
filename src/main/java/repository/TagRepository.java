@@ -32,6 +32,7 @@ public class TagRepository {
             SELECT *FROM  TAGS;
             """;
 
+
     public void save(String title) throws SQLException {
         var statement = Datasource.getConnection().prepareStatement(INSERT_SQL);
         statement.setString(1,title);
