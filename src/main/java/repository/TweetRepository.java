@@ -13,6 +13,10 @@ public class TweetRepository {
             INSERT INTO tweet(content ,user_id)
             VALUES(?,?)
             """;
+    private static final String RETWEET = """
+            INSERT INTO tweet(content ,user_id,reTweet,reTweetId)
+            VALUES(?,?,?,?)
+            """;
     private static final String DELETE_BY_ID_SQL = """
             DELETE FROM tweet 
             WHERE tweet_id= ?
@@ -47,7 +51,18 @@ public class TweetRepository {
 
 return tweet;
     }
+    public static Tweet retweet(Tweet tweet) throws SQLException {
+        var statement = Datasource.getConnection().prepareStatement(RETWEET);
 
+        statement.setString(1,tweet.getContent());
+        statement.setLong(2,tweet.getUserId());
+        statement.setBoolean(3,true);
+        statement.setLong(4,tweet.getTweetId());
+        statement.execute();
+        statement.close();
+
+        return tweet;
+    }
     public static void DeleteById(Long id) throws SQLException {
         try (var statement = Datasource.getConnection().prepareStatement(DELETE_BY_ID_SQL)) {
             statement.setLong(1, id);
