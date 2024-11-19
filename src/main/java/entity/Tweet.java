@@ -18,8 +18,8 @@ public class Tweet {
 //    private List<Tag>tags;
     private long userId;
 //    private List<Long> tags;
- //   private boolean reTweet;
-//    private long lastTweetId;
+   // private boolean reTweet;
+ //   private long lastTweetId;
 
 
 }
