@@ -14,6 +14,7 @@ public class Datasource {
     }
     static {
         var jdbc="jdbc:postgresql://localhost:5432/postgres";
+        //change user and password
         try {
              connection = DriverManager.getConnection(jdbc,"postgres","mostafa11684");
         }catch (SQLException e){

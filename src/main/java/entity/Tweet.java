@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -14,7 +15,7 @@ public class Tweet {
     private long tweetId;
     private String content;
     private Date createDate;
-   // private List<Tag>tags;
+//    private List<Tag>tags;
     private long userId;
 
 
