@@ -1,7 +1,9 @@
 package entity;
 
-public enum LikeDislike {
+import lombok.Data;
 
+
+public enum LikeDislike {
     LIKE,
     DIS_LIKE
 }
