@@ -2,10 +2,7 @@ package view;
 
 import entity.User;
 import repository.TweetRepository;
-import service.AuthenticationServices;
-import service.LikeService;
-import service.TweetService;
-import service.UserService;
+import service.impl.*;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -63,6 +60,7 @@ public class UserFront {
         while (flag1) {
             if (choose == 1) {
                 createTweet();
+                break;
             } else if (choose == 2) {
                 viewAllTweet();
                 System.out.println("All tweet... ");
@@ -80,6 +78,7 @@ public class UserFront {
                 }else if (choose2==2){
                     dislikeSomeTweet();
                 }else if (choose2==3){
+                    retweet();
                     break;
                 }else if (choose2==4){
 
@@ -131,6 +130,7 @@ public class UserFront {
         String content = scanner.nextLine();
        // Tweet tweet = new Tweet(1,content,null,null,1);
         tweetService.createNewTweet(content);
+
     }
     public  static void updateProfile() throws SQLException {
         Scanner scanner = new Scanner(System.in);
@@ -195,5 +195,18 @@ public static  void likeSomeTweet(){
 
 
     }
+    public static void retweet() throws SQLException {
+        System.out.println("ReTweet...");
+       var userId= AuthenticationServices.getLoggedInUser().getUserId();
+        RetweetService retweetService = new RetweetService();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("enter your content: ");
+        String content = scanner.nextLine();
+        System.out.print("choose tweet Id: ");
+        Long tweetId = scanner.nextLong();
+        RetweetService.createRetweet(content,userId,tweetId);
+
+    }
+
 
 }
